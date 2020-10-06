@@ -1107,8 +1107,8 @@ namespace HtmlToOpenXml
                     properties.TableCellWidth = new TableCellWidth() { Type = TableWidthUnitValues.Pct, Width = (unit.Value * 50).ToString(CultureInfo.InvariantCulture) };
 					break;
 				case UnitMetric.Point:
-                    // unit.ValueInPoint used instead of ValueInDxa
-                    properties.TableCellWidth = new TableCellWidth() { Type = TableWidthUnitValues.Auto, Width = (unit.ValueInPoint * 20).ToString(CultureInfo.InvariantCulture) };
+					// unit.ValueInPoint used instead of ValueInDxa
+					properties.TableCellWidth = new TableCellWidth() { Type = TableWidthUnitValues.Auto, Width = (unit.ValueInPoint * 20).ToString(CultureInfo.InvariantCulture) };
 					break;
 				case UnitMetric.Pixel:
 					properties.TableCellWidth = new TableCellWidth() { Type = TableWidthUnitValues.Dxa, Width = (unit.ValueInDxa).ToString(CultureInfo.InvariantCulture) };
