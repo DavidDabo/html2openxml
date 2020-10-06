@@ -38,6 +38,8 @@ namespace Demo
                     }
 
                     HtmlConverter converter = new HtmlConverter(mainPart);
+                    converter.BeforeProcess += OnBeforeProcess;
+
                     Body body = mainPart.Document.Body;
 
                     converter.ParseHtml(html);
@@ -50,6 +52,22 @@ namespace Demo
             }
 
             System.Diagnostics.Process.Start(filename);
+        }
+
+        /// <summary>
+        /// Example on how to change attributes of an html Tag if necessary in this case all spans getting bold
+        /// </summary>
+        /// <param name="current"></param>
+        /// <param name="Tag"></param>
+        static void OnBeforeProcess(object sender, BeforeProcessEventArgs args)
+        {
+            switch (args.Tag)
+            {
+                case "<span>":
+                    if (!string.IsNullOrEmpty(args.Current["style"]))
+                        args.Current["style"] = "font-weight: bold";
+                    break;
+            }
         }
 
         static void AssertThatOpenXmlDocumentIsValid(WordprocessingDocument wpDoc)

@@ -31,6 +31,12 @@ namespace HtmlToOpenXml
 	/// </summary>
 	public partial class HtmlConverter
 	{
+
+		/// <summary>
+		/// Occurs before an html tag is processed  
+		/// </summary>
+		public event EventHandler<BeforeProcessEventArgs> BeforeProcess;
+
 		private MainDocumentPart mainPart;
 		/// <summary>The list of paragraphs that will be returned.</summary>
 		private IList<OpenXmlCompositeElement> paragraphs;
@@ -680,6 +686,19 @@ namespace HtmlToOpenXml
 		public void RefreshStyles()
 		{
 			htmlStyles.PrepareStyles(mainPart);
+		}
+
+		#endregion
+
+		#region OnBeforeProcess
+
+		/// <summary>
+		/// Raises the BeforeProcess event.
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnBeforeProcess(BeforeProcessEventArgs e)
+		{
+			if (BeforeProcess != null) BeforeProcess(this, e);
 		}
 
 		#endregion
