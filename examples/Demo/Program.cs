@@ -39,6 +39,7 @@ namespace Demo
 
                     HtmlConverter converter = new HtmlConverter(mainPart);
                     converter.BeforeProcess += OnBeforeProcess;
+                    converter.AfterProcess += Converter_AfterProcess;
 
                     Body body = mainPart.Document.Body;
 
@@ -52,6 +53,28 @@ namespace Demo
             }
 
             System.Diagnostics.Process.Start(filename);
+        }
+
+
+        private static void Converter_AfterProcess(object sender, AfterProcessEventArgs e)
+        {
+            switch (e.Tag)
+            {
+                case "<img>":
+                    if (e.CurrentParagraph == null)
+                        return;
+                    if (e.HtmlAttributes["class"] == null)
+                        return;
+                    ParagraphProperties paragraphProperties1 = new ParagraphProperties();
+                    if (e.HtmlAttributes["class"].Contains("fr-fic"))
+                        paragraphProperties1.Append(new Justification() { Val = JustificationValues.Center });
+                    if (e.HtmlAttributes["class"].Contains("fr-fil"))
+                        paragraphProperties1.Append(new Justification() { Val = JustificationValues.Left });
+                    if (e.HtmlAttributes["class"].Contains("fr-fir"))
+                        paragraphProperties1.Append(new Justification() { Val = JustificationValues.Right });
+                    e.CurrentParagraph.Append(paragraphProperties1);
+                    break;
+            }
         }
 
         /// <summary>

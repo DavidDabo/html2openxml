@@ -37,6 +37,12 @@ namespace HtmlToOpenXml
 		/// </summary>
 		public event EventHandler<BeforeProcessEventArgs> BeforeProcess;
 
+		/// <summary>
+		/// Occurs after an html tag is processed  
+		/// </summary>
+		public event EventHandler<AfterProcessEventArgs> AfterProcess;
+
+
 		private MainDocumentPart mainPart;
 		/// <summary>The list of paragraphs that will be returned.</summary>
 		private IList<OpenXmlCompositeElement> paragraphs;
@@ -686,6 +692,20 @@ namespace HtmlToOpenXml
 		public void RefreshStyles()
 		{
 			htmlStyles.PrepareStyles(mainPart);
+		}
+
+		#endregion
+
+
+		#region OnAfterProcess
+
+		/// <summary>
+		/// Raises the AfterProcess event.
+		/// </summary>
+		/// <param name="e"></param>
+		protected virtual void OnAfterProcess(AfterProcessEventArgs e)
+		{
+			if (AfterProcess != null) AfterProcess(this, e);
 		}
 
 		#endregion
