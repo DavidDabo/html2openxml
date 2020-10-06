@@ -1085,7 +1085,7 @@ namespace HtmlToOpenXml
 
 			TableCellProperties properties = new TableCellProperties();
             // in Html, table cell are vertically centered by default
-            properties.TableCellVerticalAlignment = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Center };
+            properties.TableCellVerticalAlignment = new TableCellVerticalAlignment() { Val = TableVerticalAlignmentValues.Top };
 
 			List<OpenXmlElement> styleAttributes = new List<OpenXmlElement>();
 			List<OpenXmlElement> runStyleAttributes = new List<OpenXmlElement>();
@@ -1097,7 +1097,11 @@ namespace HtmlToOpenXml
             Unit heightUnit = en.StyleAttributes.GetAsUnit("height");
             if (!heightUnit.IsValid) heightUnit = en.Attributes.GetAsUnit("height");
 
-            switch (unit.Type)
+			Unit verticalPosition = en.StyleAttributes.GetAsUnit("vertical-align");
+			if (!verticalPosition.IsValid) verticalPosition = en.Attributes.GetAsUnit("vertical-align");
+
+
+			switch (unit.Type)
 			{
 				case UnitMetric.Percent:
                     properties.TableCellWidth = new TableCellWidth() { Type = TableWidthUnitValues.Pct, Width = (unit.Value * 50).ToString(CultureInfo.InvariantCulture) };
