@@ -1,6 +1,8 @@
 /*
  * Copyright (c) 2017 Deal Stream sàrl. All rights reserved
  */
+using NUnit.Framework;
+using System;
 using System.IO;
 using System.Reflection;
 using System.Resources;
@@ -12,6 +14,18 @@ namespace HtmlToOpenXml.Tests
     /// </summary>
     public static class ResourceHelper
     {
+        /// <summary>
+        /// Load a file from the "Resources" folder. If the file is directly below the folder, e.g. "Resources/MyTestFile.txt", then you only need to pass "MyTestFile.txt" to this method.
+        /// 
+        /// </summary>
+        /// <param name="filename">The name of the file being read, starting from the resources folder.</param>
+        /// <returns></returns>
+        public static string GetFileContentFromResources(string filename)
+        {
+            string text = File.ReadAllText(TestContext.CurrentContext.TestDirectory + "\\Resources\\" + filename);
+            return text;
+        }
+
         public static string GetString(string resourceName)
         {
             return GetString(typeof(ResourceHelper).GetTypeInfo().Assembly, resourceName);
