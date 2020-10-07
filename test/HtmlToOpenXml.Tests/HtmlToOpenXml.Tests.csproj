@@ -10,6 +10,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="HtmlAgilityPack" Version="1.11.24" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.0.0" />
     <PackageReference Include="NUnit" Version="3.12.0" />
     <PackageReference Include="NUnit3TestAdapter" Version="3.17.0" />
@@ -21,7 +22,26 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Remove="Resources\Table.html" />
+    <EmbeddedResource Remove="Resources\TableWithBRs.html" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\DocWithTable.docx" />
+    <None Remove="Resources\README.md" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Resources\Table.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\TableWithBRs.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
