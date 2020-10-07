@@ -30,5 +30,19 @@ namespace HtmlToOpenXml.Tests.ParsingTests
             var filename = $"Table_{DateTime.Now:yyyyMMddHHmmss}.docx";
             WordDocumentCreator.Create($"{Path.Combine(dir, filename)}", html);
         }
+
+        [TestCase]
+        public void ParseTableWithBRs_RemoveBRFromEmptyTDs_Success()
+        {
+            converter.TableSettings = new Settings.TableParserSettings()
+            {
+                ClearEmptyTDs = true
+            };
+
+            var html = ResourceHelper.GetFileContentFromResources("TableWithBRs.html");
+            var dir = @"C:\Users\DavidBolt\source\repos\html2openxml_dave\test\HtmlToOpenXml.Tests\Resources\";
+            var filename = $"Table_{DateTime.Now:yyyyMMddHHmmss}.docx";
+            WordDocumentCreator.Create($"{Path.Combine(dir, filename)}", html);
+        }
     }
 }

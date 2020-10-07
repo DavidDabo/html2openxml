@@ -24,6 +24,8 @@
   <ItemGroup>
     <EmbeddedResource Remove="Resources\Table.html" />
     <EmbeddedResource Remove="Resources\TableWithBRs.html" />
+    <EmbeddedResource Remove="Resources\TableWithBRsClosing.html" />
+    <EmbeddedResource Remove="Resources\TableWithBRsMultiple.html" />
   </ItemGroup>
 
   <ItemGroup>
@@ -37,6 +39,12 @@
 
   <ItemGroup>
     <None Update="Resources\Table.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\TableWithBRsClosing.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Resources\TableWithBRsMultiple.html">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Update="Resources\TableWithBRs.html">

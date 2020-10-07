@@ -115,6 +115,9 @@ namespace HtmlToOpenXml
                 };
             }
 
+            if (TableSettings.ClearEmptyTDs)
+                html = ClearEmptyTDs(html);
+
             HtmlEnumerator en = new HtmlEnumerator(html);
             ProcessHtmlChunks(en, null);
 
@@ -129,8 +132,21 @@ namespace HtmlToOpenXml
         }
 
         /// <summary>
-		/// Start the parse processing and append the converted paragraphs into the Body of the document.
-		/// </summary>
+        /// Clearing all br in empty tds.
+        /// </summary>
+        /// <param name="html"></param>
+        /// <returns></returns>
+        public string ClearEmptyTDs(string html)
+        {
+            //Replace all <br> tags with any amount of whitespaces around them within tds by an empty string, but only if there is exactly one br.
+            var output = Regex.Replace(html, "<td.*>([\\s]*<br>[\\s]*)</td>", m => m.Value.Replace(m.Groups[1].Value, ""));
+            output = Regex.Replace(html, "<td.*>([\\s]*<br/>[\\s]*)</td>", m => m.Value.Replace(m.Groups[1].Value, ""));
+            return output;
+        }
+
+        /// <summary>
+        /// Start the parse processing and append the converted paragraphs into the Body of the document.
+        /// </summary>
         public void ParseHtml(String html)
         {
             // This method exists because we may ensure the SectionProperties remains the last element of the body.
