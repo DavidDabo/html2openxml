@@ -140,7 +140,7 @@ namespace HtmlToOpenXml
         {
             //Replace all <br> tags with any amount of whitespaces around them within tds by an empty string, but only if there is exactly one br.
             var output = Regex.Replace(html, "<td.*>([\\s]*<br>[\\s]*)</td>", m => m.Value.Replace(m.Groups[1].Value, ""));
-            output = Regex.Replace(html, "<td.*>([\\s]*<br/>[\\s]*)</td>", m => m.Value.Replace(m.Groups[1].Value, ""));
+            output = Regex.Replace(output, "<td.*>([\\s]*<br/>[\\s]*)</td>", m => m.Value.Replace(m.Groups[1].Value, ""));
             return output;
         }
 

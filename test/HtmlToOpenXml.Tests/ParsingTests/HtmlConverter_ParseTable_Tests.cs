@@ -19,7 +19,8 @@ namespace HtmlToOpenXml.Tests.ParsingTests
             var html = ResourceHelper.GetFileContentFromResources("Table.html");
             var dir = @"C:\Users\DavidBolt\source\repos\html2openxml_dave\test\HtmlToOpenXml.Tests\Resources\";
             var filename = $"Table_{DateTime.Now:yyyyMMddHHmmss}.docx";
-            WordDocumentCreator.Create($"{Path.Combine(dir, filename)}", html);
+            string fullFilename = $"{Path.Combine(dir, filename)}";
+            WordDocumentCreator.Create(fullFilename, html);
         }
 
         [TestCase]
@@ -28,21 +29,18 @@ namespace HtmlToOpenXml.Tests.ParsingTests
             var html = ResourceHelper.GetFileContentFromResources("TableWithBRs.html");
             var dir = @"C:\Users\DavidBolt\source\repos\html2openxml_dave\test\HtmlToOpenXml.Tests\Resources\";
             var filename = $"Table_{DateTime.Now:yyyyMMddHHmmss}.docx";
-            WordDocumentCreator.Create($"{Path.Combine(dir, filename)}", html);
+            string fullFilename = $"{Path.Combine(dir, filename)}";
+            WordDocumentCreator.Create(fullFilename, html);
         }
 
         [TestCase]
         public void ParseTableWithBRs_RemoveBRFromEmptyTDs_Success()
         {
-            converter.TableSettings = new Settings.TableParserSettings()
-            {
-                ClearEmptyTDs = true
-            };
-
             var html = ResourceHelper.GetFileContentFromResources("TableWithBRs.html");
             var dir = @"C:\Users\DavidBolt\source\repos\html2openxml_dave\test\HtmlToOpenXml.Tests\Resources\";
             var filename = $"Table_{DateTime.Now:yyyyMMddHHmmss}.docx";
-            WordDocumentCreator.Create($"{Path.Combine(dir, filename)}", html);
+            string fullFilename = $"{Path.Combine(dir, filename)}";
+            WordDocumentCreator.Create(fullFilename, html, new Settings.TableParserSettings{ ClearEmptyTDs = true });
         }
     }
 }

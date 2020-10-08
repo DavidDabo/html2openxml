@@ -2,6 +2,7 @@
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Wordprocessing;
 using HtmlAgilityPack;
+using HtmlToOpenXml.Settings;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -13,7 +14,7 @@ namespace HtmlToOpenXml.Tests.Utilities
 {
     public static class WordDocumentCreator
     {
-        public static void Create(string filepath, string innerhtml)
+        public static void Create(string filepath, string innerhtml, TableParserSettings tableParserSettings = null)
         {
             using (FileStream generatedDocument = new FileStream(filepath, FileMode.CreateNew, FileAccess.ReadWrite))
             {
@@ -55,6 +56,7 @@ namespace HtmlToOpenXml.Tests.Utilities
                     }
 
                     HtmlConverter converter = new HtmlConverter(mainPart);
+                    converter.TableSettings = tableParserSettings ?? converter.TableSettings;
                     //converter.BeforeProcess += OnBeforeProcess;
                     //converter.AfterProcess += Converter_AfterProcess;
 
