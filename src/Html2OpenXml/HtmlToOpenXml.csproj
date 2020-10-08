@@ -23,6 +23,7 @@
     <AssemblyOriginatorKeyFile>HtmlToOpenXml.snk</AssemblyOriginatorKeyFile>
     <PublicSign Condition="'$(OS)' != 'Windows_NT'">true</PublicSign>
     <RepositoryType>GIT</RepositoryType>
+    <IncludeSymbols>true</IncludeSymbols>
   </PropertyGroup>
 
   <PropertyGroup Condition=" '$(TargetFramework)' == 'netstandard1.3' ">
