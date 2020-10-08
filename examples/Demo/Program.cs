@@ -38,6 +38,7 @@ namespace Demo
                     }
 
                     HtmlConverter converter = new HtmlConverter(mainPart);
+                    converter.RenderPreAsTable = true;
                     converter.BeforeProcess += OnBeforeProcess;
                     converter.AfterProcess += Converter_AfterProcess;
 
